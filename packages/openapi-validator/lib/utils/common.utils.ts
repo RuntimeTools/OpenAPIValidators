@@ -21,20 +21,29 @@ const doesOpenApiPathMatchPathname = (openApiPath, pathname) => {
   return doesColonPathMatchPathname(pathInColonForm, pathname);
 };
 
+const countPathParams = (openApiPath) => {
+  return (openApiPath.match(/\{/g) || []).length;
+};
+
 export const findOpenApiPathMatchingPossiblePathnames = (
   possiblePathnames,
   OAPaths,
 ) => {
   let openApiPath;
+  let nbPathParams = -1;
   // eslint-disable-next-line no-restricted-syntax
   for (const pathname of possiblePathnames) {
     // eslint-disable-next-line no-restricted-syntax
     for (const OAPath of OAPaths) {
+      const count = countPathParams(OAPath);
       if (OAPath === pathname) {
         return OAPath;
       }
       if (doesOpenApiPathMatchPathname(OAPath, pathname)) {
-        openApiPath = OAPath;
+        if (nbPathParams == -1 || count < nbPathParams) {
+          nbPathParams = count;
+          openApiPath = OAPath;
+        }
       }
     }
   }

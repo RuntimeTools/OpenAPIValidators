@@ -1,0 +1,20 @@
+swagger: '2.0'
+info:
+  title: Test OpenApi 2 spec
+  description: Test that our plugins prefer to match responses to least-templated paths over most-templated paths
+  version: 0.1.0
+paths:
+  ? /preferLeastTemplatedPathOverMostTemplatedPath/{templatedPath}/nonTemplatedPath
+  : get:
+      responses:
+        200:
+          description: Response body should be a string
+          schema:
+            type: string
+  ? /preferLeastTemplatedPathOverMostTemplatedPath/{templatedPath}/{templatedPath2}
+  : get:
+      responses:
+        200:
+          description: Response body should be a number
+          schema:
+            type: number
