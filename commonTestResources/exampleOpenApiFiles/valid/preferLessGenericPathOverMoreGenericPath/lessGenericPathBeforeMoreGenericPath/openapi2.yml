@@ -1,0 +1,20 @@
+swagger: '2.0'
+info:
+  title: Test OpenApi 2 spec
+  description: Test that our plugins prefer to match responses to less generic paths over more generic paths
+  version: 0.1.0
+paths:
+  /preferLessGenericPathOverMoreGenericPath/{templatedPath}/nonTemplatedPath:
+    get:
+      responses:
+        200:
+          description: Response body should be a string
+          schema:
+            type: string
+  /preferLessGenericPathOverMoreGenericPath/{templatedPath}/{templatedPath2}:
+    get:
+      responses:
+        200:
+          description: Response body should be a number
+          schema:
+            type: number

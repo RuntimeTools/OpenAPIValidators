@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Test OpenApi 3 spec
+  description: Test that our plugins prefer to match responses to less generic paths over more generic paths
+  version: 0.1.0
+paths:
+  /preferLessGenericPathOverMoreGenericPath/{templatedPath}/{forCodeCoverage}:
+    get:
+      responses:
+        200:
+          description: Response body should be a number
+          content:
+            application/json:
+              schema:
+                type: number
+  /preferLessGenericPathOverMoreGenericPath/{templatedPath}/{templatedPath2}:
+    get:
+      responses:
+        200:
+          description: Response body should be a number
+          content:
+            application/json:
+              schema:
+                type: number
+  /preferLessGenericPathOverMoreGenericPath/{templatedPath}/nonTemplatedPath:
+    get:
+      responses:
+        200:
+          description: Response body should be a string
+          content:
+            application/json:
+              schema:
+                type: string
